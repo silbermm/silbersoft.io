@@ -20,7 +20,7 @@ import {Home} from './home/home';
   template: `
     <header>
       <nav>
-        <h1>Hello {{ name }}</h1>
+        <h1>Hiya! {{ name }}</h1>
         <a [routerLink]=" ['Index'] ">Index</a>
         <a [routerLink]=" ['Home'] ">Home</a>
       </nav>
