@@ -1,6 +1,6 @@
 general:
   artifacts:
-    - "dist/"
+    - "dist"
 deployment:
   production:
     branch: master
