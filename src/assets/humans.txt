@@ -4,6 +4,7 @@
 # TEAM
 
   <name> -- <role> -- <twitter>
+  Matt Silbernagel -- Everything -- @silbermm
 
 # THANKS
 
