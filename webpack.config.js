@@ -42,7 +42,7 @@ module.exports = {
 
   resolve: {
     // ensure loader extensions match
-    extensions: ['', '.ts', '.js', '.json', '.css', '.html']
+    extensions: ['', '.ts', '.js', '.json', '.css', '.html', '.sass']
   },
 
   module: {
@@ -71,9 +71,10 @@ module.exports = {
       { test: /\.css$/,   loader: 'raw-loader' },
 
       // support for .html as raw text
-      { test: /\.html$/,  loader: 'raw-loader' }
+      { test: /\.html$/,  loader: 'raw-loader' },
 
       // if you add a loader include the resolve file extension above
+      { test: /\.scss$/, loaders: ["style", "css", "sass"] }
     ]
   },
 
