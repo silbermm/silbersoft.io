@@ -19,7 +19,7 @@ var metadata = {
  * Config
  */
 module.exports = {
-  
+
   // static data for index.html
   metadata: metadata,
 
@@ -42,25 +42,26 @@ module.exports = {
 
   resolve: {
     // ensure loader extensions match
-    extensions: ['','.ts','.js','.json','.css','.html']
+    extensions: ['', '.ts', '.js', '.json', '.css', '.html', '.sass']
   },
 
   module: {
     preLoaders: [{ test: /\.ts$/, loader: 'tslint-loader', exclude: [/node_modules/] }],
     loaders: [
+
       // Support for .ts files.
       {
         test: /\.ts$/,
         loader: 'ts-loader',
         query: {
-          'ignoreDiagnostics': [
+          ignoreDiagnostics: [
             2403, // 2403 -> Subsequent variable declarations
             2300, // 2300 -> Duplicate identifier
             2374, // 2374 -> Duplicate number index signature
             2375  // 2375 -> Duplicate string index signature
           ]
         },
-        exclude: [ /\.(spec|e2e)\.ts$/, /node_modules\/(?!(ng2-.+))/ ]
+        exclude: [/\.(spec|e2e)\.ts$/, /node_modules\/(?!(ng2-.+))/]
       },
 
       // Support for *.json files.
@@ -70,23 +71,27 @@ module.exports = {
       { test: /\.css$/,   loader: 'raw-loader' },
 
       // support for .html as raw text
-      { test: /\.html$/,  loader: 'raw-loader' }
+      { test: /\.html$/,  loader: 'raw-loader' },
 
       // if you add a loader include the resolve file extension above
+      { test: /\.scss$/, loaders: ["style", "css", "sass"] }
     ]
   },
 
   plugins: [
     new CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.bundle.js', minChunks: Infinity }),
+
     // static assets
-    new CopyWebpackPlugin([ { from: 'src/assets', to: 'assets' } ]),
+    new CopyWebpackPlugin([{ from: 'src/assets', to: 'assets' }]),
+
     // generating html
     new HtmlWebpackPlugin({ template: 'src/index.html', inject: false }),
+
     // replace
     new DefinePlugin({
       'process.env': {
-        'ENV': JSON.stringify(metadata.ENV),
-        'NODE_ENV': JSON.stringify(metadata.ENV)
+        ENV: JSON.stringify(metadata.ENV),
+        NODE_ENV: JSON.stringify(metadata.ENV)
       }
     })
   ],
@@ -96,6 +101,7 @@ module.exports = {
     emitErrors: false,
     failOnHint: false
   },
+
   // our Webpack Development Server config
   devServer: {
     port: metadata.port,
@@ -103,6 +109,7 @@ module.exports = {
     historyApiFallback: true,
     watchOptions: { aggregateTimeout: 300, poll: 1000 }
   },
+
   // we need this due to problems with es6-shim
   node: {global: 'window', progress: false, crypto: 'empty', module: false, clearImmediate: false, setImmediate: false}
 };
